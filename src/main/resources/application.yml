@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: mcp_tools
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_ecommerce?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 1234567
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.yorozuya.mcp_tools.domain
+  configuration:
+    map-underscore-to-camel-case: true
+
+server:
+  port: 8087

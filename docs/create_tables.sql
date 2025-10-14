@@ -5,7 +5,6 @@ use db_ecommerce;
 create table if not exists tb_users (
     `id` INT AUTO_INCREMENT PRIMARY KEY COMMENT '用户ID',
     `username` VARCHAR(50) NOT NULL UNIQUE COMMENT '用户名',
-    `email` VARCHAR(100) UNIQUE COMMENT '邮箱',
     `password` VARCHAR(255) NOT NULL COMMENT '密码',
     `created_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间'
 )ENGINE=InnoDB COMMENT='用户表';
