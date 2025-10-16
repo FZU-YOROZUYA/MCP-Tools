@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface UserMapper {
     List<User> findAll();
+    int insertUser(User user);
+    int updateUser(User user);
 }
