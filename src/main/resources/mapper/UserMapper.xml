@@ -13,33 +13,57 @@
         select * from tb_users
     </select>
 
+    <select id="findById" parameterType="_int" resultMap="ToUser">
+        select * from tb_users where id=#{uid}
+    </select>
+
+    <select id="findByUsername" parameterType="string" resultMap="ToUser">
+        select * from tb_users where username=#{username}
+    </select>
+
     <insert id="insertUser" parameterType="User">
         insert into tb_users
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id!=null">id,</if>
+            <if test="id!=0">id,</if>
             <if test="username!=null">username,</if>
             <if test="password!=null">password,</if>
             <if test="createdTime!=null">created_time,</if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id!=null">#{id},</if>
+            <if test="id!=0">#{id},</if>
             <if test="username!=null">#{username},</if>
             <if test="password!=null">#{password},</if>
             <if test="createdTime!=null">#{createdTime},</if>
         </trim>
     </insert>
 
-    <update id="updateUser" parameterType="User">
+    <update id="updateUserById" parameterType="User">
         update tb_users
         <set>
             <if test="username!=null">username=#{username},</if>
             <if test="password!=null">password=#{password},</if>
             <if test="createdTime!=null">created_time=#{createdTime},</if>
         </set>
-        <where>
-            <if test="id!=null">id=#{id}</if>
-        </where>
+        where id=#{id}
     </update>
+
+    <update id="updateUserByUsername" parameterType="User">
+        update tb_users
+        <set>
+            <if test="id!=0">id=#{id},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="createdTime!=null">created_time=#{createdTime},</if>
+        </set>
+        where username=#{username}
+    </update>
+
+    <delete id="deleteUserById" parameterType="_int">
+        delete from tb_users where id=#{uid}
+    </delete>
+
+    <delete id="deleteUserByUsername" parameterType="string">
+        delete from tb_users where username=#{username}
+    </delete>
 
 </mapper>
