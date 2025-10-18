@@ -37,17 +37,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insertUser(User user) {
         return userMapper.insertUser(user);
-    }
+    }//注册时需要
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int updateUserById(User user) {
         return userMapper.updateUserById(user);
-    }
+    }//改变用户信息
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int updateUserByUsername(User user) {
         return userMapper.updateUserByUsername(user);
-    }
+    }//改变用户信息
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int deleteUserById(int id) {
@@ -57,5 +57,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteUserByUsername(String username) {
         return userMapper.deleteUserByUsername(username);
+    }
+
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+    @Override
+    public boolean loginJudge(User user) {
+        User testUser=userMapper.findByUsername(user.getUsername());
+        if(testUser!=null&&testUser.getPassword().equals(user.getPassword())){
+            return true;
+        }
+        return false;
     }
 }

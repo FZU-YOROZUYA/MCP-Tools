@@ -14,4 +14,5 @@ public interface UserService {
     int updateUserByUsername(User user);
     int deleteUserById(int id);
     int deleteUserByUsername(String username);
+    boolean loginJudge(User user);
 }

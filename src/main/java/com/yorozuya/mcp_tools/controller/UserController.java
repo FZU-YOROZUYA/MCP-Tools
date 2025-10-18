@@ -65,4 +65,10 @@ public class UserController {
         return userService.deleteUserByUsername(username);
     }
 
+    @PostMapping("/loginJudge")
+    @ResponseBody
+    public boolean loginJudge(@RequestBody User user) {
+        return userService.loginJudge(user);
+    }
+
 }
