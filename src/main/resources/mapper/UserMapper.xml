@@ -26,7 +26,7 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id!=0">id,</if>
             <if test="username!=null">username,</if>
-            <if test="password!=null">password,</if>
+            password,
             <if test="createdTime!=null">created_time,</if>
         </trim>
         values

@@ -7,49 +7,53 @@ import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService {
-    @Resource
+    @Autowired
+    @Qualifier("UserMapper")
     private UserMapper userMapper;
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public List<User> getUsers() {
         return userMapper.findAll();
     }
-
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public User findById(int id) {
         return userMapper.findById(id);
     }
-
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public User findByUsername(String username) {
         return userMapper.findByUsername(username);
     }
-
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int insertUser(User user) {
         return userMapper.insertUser(user);
     }
-
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int updateUserById(User user) {
         return userMapper.updateUserById(user);
     }
-
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int updateUserByUsername(User user) {
         return userMapper.updateUserByUsername(user);
     }
-
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int deleteUserById(int id) {
         return userMapper.deleteUserById(id);
     }
-
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     @Override
     public int deleteUserByUsername(String username) {
         return userMapper.deleteUserByUsername(username);

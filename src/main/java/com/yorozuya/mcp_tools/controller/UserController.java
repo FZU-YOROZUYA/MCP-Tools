@@ -29,7 +29,7 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @PostMapping("/find_username")
+    @GetMapping("/find_username")
     @ResponseBody
     public User findByUsername(@RequestParam("username")String username) {
         return userService.findByUsername(username);
