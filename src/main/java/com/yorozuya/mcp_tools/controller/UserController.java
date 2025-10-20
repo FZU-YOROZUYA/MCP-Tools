@@ -10,63 +10,54 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/api")
+@RestController
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     @Qualifier("UserService")
     private UserService userService;
 
     @GetMapping("/find_all")
-    @ResponseBody
     public List<User> findAll() {
         return userService.getUsers();
     }
 
-    @GetMapping("/find_id")
-    @ResponseBody
+    @GetMapping("/find_by_id")
     public User findById(@RequestParam("id") int id) {
         return userService.findById(id);
     }
 
-    @GetMapping("/find_username")
-    @ResponseBody
+    @GetMapping("/find_by_username")
     public User findByUsername(@RequestParam("username")String username) {
         return userService.findByUsername(username);
     }
 
-    @PostMapping("/insertUser")
-    @ResponseBody
+    @PostMapping("/insert")
     public int insertUser(@RequestBody User user) {
         return userService.insertUser(user);
     }
 
     @PostMapping("/update_by_id")
-    @ResponseBody
     public int updateById(@RequestBody User user) {
         return userService.updateUserById(user);
     }
 
     @PostMapping("/update_by_username")
-    @ResponseBody
     public int updateByUsername(@RequestBody User user) {
         return userService.updateUserByUsername(user);
     }
 
     @PostMapping("/delete_by_id")
-    @ResponseBody
     public int deleteById(@RequestParam("id") int id) {
         return userService.deleteUserById(id);
     }
 
     @PostMapping("/delete_by_username")
-    @ResponseBody
     public int deleteByUsername(@RequestParam("username") String username) {
         return userService.deleteUserByUsername(username);
     }
 
-    @PostMapping("/loginJudge")
-    @ResponseBody
+    @PostMapping("/login")
     public boolean loginJudge(@RequestBody User user) {
         return userService.loginJudge(user);
     }

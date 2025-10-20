@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yorozuya.mcp_tools.repository.ProductMapper">
+
+    <resultMap id="ToProduct" type="Product">
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="ToProduct">
+        select * from tb_products
+    </select>
+
+    <select id="findById" parameterType="_int" resultMap="ToProduct">
+        select * from tb_products where id=#{pid}
+    </select>
+
+    <select id="findByName" parameterType="string" resultMap="ToProduct">
+        select * from tb_products where name=#{name}
+    </select>
+
+    <insert id="insertProduct" parameterType="Product">
+        insert into tb_products
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">name,</if>
+            <if test="description!=null">description,</if>
+            <if test="price!=null">price,</if>
+            <if test="stock!=0">stock,</if>
+            <if test="createdTime!=null">created_time,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">#{name},</if>
+            <if test="description!=null">#{description},</if>
+            <if test="price!=null">#{price},</if>
+            <if test="stock!=0">#{stock},</if>
+            <if test="createdTime!=null">#{createdTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateProductById" parameterType="Product">
+        update tb_products
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="description!=null">description=#{description},</if>
+            <if test="price!=null">price=#{price},</if>
+            <if test="stock!=0">stock=#{stock},</if>
+            <if test="createdTime!=null">created_time=#{createdTime},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <update id="updateProductByName" parameterType="Product">
+        update tb_products
+        <set>
+            <if test="description!=null">description=#{description},</if>
+            <if test="price!=null">price=#{price},</if>
+            <if test="stock!=0">stock=#{stock},</if>
+            <if test="createdTime!=null">created_time=#{createdTime},</if>
+        </set>
+        where name=#{name}
+    </update>
+
+    <delete id="deleteProductById" parameterType="_int">
+        delete from tb_products where id=#{pid}
+    </delete>
+
+    <delete id="deleteProductByName" parameterType="string">
+        delete from tb_products where name=#{name}
+    </delete>
+
+</mapper>
