@@ -10,50 +10,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/order")
 public class OrderController {
     @Autowired
     @Qualifier("OrderService")
     private OrderService orderService;
 
-    @GetMapping("/orders")
-    @ResponseBody
+    @GetMapping("/find_all")
     public List<Order> findAll() {
         return orderService.getOrders();
     }
 
-    @GetMapping("/order/id")
-    @ResponseBody
+    @GetMapping("/find_by_id")
     public Order findById(@RequestParam("id") int id) {
         return orderService.findById(id);
     }
 
-    @GetMapping("/order/user")
-    @ResponseBody
+    @GetMapping("/find_by_user_id")
     public List<Order> findByUserId(@RequestParam("userId") int userId) {
         return orderService.findByUserId(userId);
     }
 
-    @GetMapping("/order/product")
-    @ResponseBody
+    @GetMapping("/find_by_product_id")
     public List<Order> findByProductId(@RequestParam("productId") int productId) {
         return orderService.findByProductId(productId);
     }
 
-    @PostMapping("/insertOrder")
-    @ResponseBody
+    @PostMapping("/insert")
     public int insertOrder(@RequestBody Order order) {
         return orderService.insertOrder(order);
     }
 
-    @PostMapping("/updateOrderById")
-    @ResponseBody
+    @PostMapping("/update_by_id")
     public int updateById(@RequestBody Order order) {
         return orderService.updateOrderById(order);
     }
 
-    @PostMapping("/deleteOrderById")
-    @ResponseBody
+    @PostMapping("/delete_by_id")
     public int deleteById(@RequestParam("id") int id) {
         return orderService.deleteOrderById(id);
     }

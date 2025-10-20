@@ -10,56 +10,48 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/product")
 public class ProductController {
     @Autowired
     @Qualifier("ProductService")
     private ProductService productService;
 
-    @GetMapping("/products")
-    @ResponseBody
+    @GetMapping("/find_all")
     public List<Product> findAll() {
         return productService.getProducts();
     }
 
-    @GetMapping("/product/id")
-    @ResponseBody
+    @GetMapping("/find_by_id")
     public Product findById(@RequestParam("id") int id) {
         return productService.findById(id);
     }
 
-    @GetMapping("/product/name")
-    @ResponseBody
+    @GetMapping("/find_by_name")
     public Product findByName(@RequestParam("name") String name) {
         return productService.findByName(name);
     }
 
-    @PostMapping("/insertProduct")
-    @ResponseBody
+    @PostMapping("/insert")
     public int insertProduct(@RequestBody Product product) {
         return productService.insertProduct(product);
     }
 
-    @PostMapping("/updateProductById")
-    @ResponseBody
+    @PostMapping("/update_by_id")
     public int updateById(@RequestBody Product product) {
         return productService.updateProductById(product);
     }
 
-    @PostMapping("/updateProductByName")
-    @ResponseBody
+    @PostMapping("/update_by_name")
     public int updateByName(@RequestBody Product product) {
         return productService.updateProductByName(product);
     }
 
-    @PostMapping("/deleteProductById")
-    @ResponseBody
+    @PostMapping("/delete_by_id")
     public int deleteById(@RequestParam("id") int id) {
         return productService.deleteProductById(id);
     }
 
-    @PostMapping("/deleteProductByName")
-    @ResponseBody
+    @PostMapping("/delete_by_name")
     public int deleteByName(@RequestParam("name") String name) {
         return productService.deleteProductByName(name);
     }
