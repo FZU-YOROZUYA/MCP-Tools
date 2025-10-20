@@ -24,14 +24,12 @@
     <insert id="insertUser" parameterType="User">
         insert into tb_users
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id!=0">id,</if>
             <if test="username!=null">username,</if>
             password,
             <if test="createdTime!=null">created_time,</if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id!=0">#{id},</if>
             <if test="username!=null">#{username},</if>
             <if test="password!=null">#{password},</if>
             <if test="createdTime!=null">#{createdTime},</if>
@@ -51,7 +49,6 @@
     <update id="updateUserByUsername" parameterType="User">
         update tb_users
         <set>
-            <if test="id!=0">id=#{id},</if>
             <if test="password!=null">password=#{password},</if>
             <if test="createdTime!=null">created_time=#{createdTime},</if>
         </set>

@@ -17,17 +17,14 @@ public class TestUserMapper {
     @Test
     public void testFindAll(){
         User _user=new User();
-        _user.setId(1);
         _user.setUsername("王浩楠");
         _user.setPassword("123456");
         userMapper.insertUser(_user);
         User _user0=new User();
-        _user0.setId(2);
         _user0.setUsername("MikeTuring");
         _user0.setPassword("pzl945464");
         userMapper.insertUser(_user0);
         User _user1=new User();
-        _user1.setId(4);
         _user1.setUsername("时科");
         _user1.setPassword("shike.1989115");
         userMapper.insertUser(_user1);

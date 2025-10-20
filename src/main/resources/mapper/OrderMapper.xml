@@ -31,7 +31,6 @@
     <insert id="insertOrder" parameterType="Order">
         insert into tb_orders
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id!=0">id,</if>
             <if test="userId!=0">user_id,</if>
             <if test="productId!=0">product_id,</if>
             <if test="quantity!=0">quantity,</if>
@@ -40,7 +39,6 @@
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id!=0">#{id},</if>
             <if test="userId!=0">#{userId},</if>
             <if test="productId!=0">#{productId},</if>
             <if test="quantity!=0">#{quantity},</if>

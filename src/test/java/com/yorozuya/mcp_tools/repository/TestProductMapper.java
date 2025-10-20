@@ -17,7 +17,6 @@ public class TestProductMapper {
     @Test
     public void testFindAll(){
         Product product = new Product();
-        product.setId(1);
         product.setName("苹果");
         product.setDescription("新鲜苹果");
         product.setPrice(new BigDecimal("5.00"));
@@ -25,7 +24,6 @@ public class TestProductMapper {
         productMapper.insertProduct(product);
 
         Product product2 = new Product();
-        product2.setId(2);
         product2.setName("香蕉");
         product2.setDescription("黄色香蕉");
         product2.setPrice(new BigDecimal("3.50"));
@@ -33,12 +31,7 @@ public class TestProductMapper {
         productMapper.insertProduct(product2);
 
         List<Product> products = productMapper.findAll();
-        System.out.println("==========================================================");
-        for (Product p : products){
-            System.out.println(p.toString());
-        }
 
-        System.out.println("==========================================================");
         System.out.println(productMapper.findById(1));
 
         Product updateProduct = new Product();
@@ -47,22 +40,11 @@ public class TestProductMapper {
         updateProduct.setStock(80);
         productMapper.updateProductById(updateProduct);
 
-        System.out.println("==========================================================");
-        System.out.println(productMapper.findByName("红苹果").toString());
 
         productMapper.deleteProductById(2);
         products = productMapper.findAll();
-        System.out.println("==========================================================");
-        for (Product p : products){
-            System.out.println(p.toString());
-        }
 
         productMapper.deleteProductByName("红苹果");
         products = productMapper.findAll();
-        System.out.println("==========================================================");
-        for (Product p : products){
-            System.out.println(p.toString());
-        }
-        System.out.println("==========================================================");
     }
 }

@@ -24,7 +24,6 @@
     <insert id="insertProduct" parameterType="Product">
         insert into tb_products
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id!=0">id,</if>
             <if test="name!=null">name,</if>
             <if test="description!=null">description,</if>
             <if test="price!=null">price,</if>
@@ -33,7 +32,6 @@
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id!=0">#{id},</if>
             <if test="name!=null">#{name},</if>
             <if test="description!=null">#{description},</if>
             <if test="price!=null">#{price},</if>
@@ -57,7 +55,6 @@
     <update id="updateProductByName" parameterType="Product">
         update tb_products
         <set>
-            <if test="id!=0">id=#{id},</if>
             <if test="description!=null">description=#{description},</if>
             <if test="price!=null">price=#{price},</if>
             <if test="stock!=0">stock=#{stock},</if>
