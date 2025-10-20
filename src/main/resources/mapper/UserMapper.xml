@@ -5,8 +5,65 @@
 
 <mapper namespace="com.yorozuya.mcp_tools.repository.UserMapper">
 
-    <select id="findAll" resultType="com.yorozuya.mcp_tools.domain.User">
+    <resultMap id="ToUser" type="User">
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="ToUser">
         select * from tb_users
     </select>
+
+    <select id="findById" parameterType="_int" resultMap="ToUser">
+        select * from tb_users where id=#{uid}
+    </select>
+
+    <select id="findByUsername" parameterType="string" resultMap="ToUser">
+        select * from tb_users where username=#{username}
+    </select>
+
+    <insert id="insertUser" parameterType="User">
+        insert into tb_users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=0">id,</if>
+            <if test="username!=null">username,</if>
+            password,
+            <if test="createdTime!=null">created_time,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=0">#{id},</if>
+            <if test="username!=null">#{username},</if>
+            <if test="password!=null">#{password},</if>
+            <if test="createdTime!=null">#{createdTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateUserById" parameterType="User">
+        update tb_users
+        <set>
+            <if test="username!=null">username=#{username},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="createdTime!=null">created_time=#{createdTime},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <update id="updateUserByUsername" parameterType="User">
+        update tb_users
+        <set>
+            <if test="id!=0">id=#{id},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="createdTime!=null">created_time=#{createdTime},</if>
+        </set>
+        where username=#{username}
+    </update>
+
+    <delete id="deleteUserById" parameterType="_int">
+        delete from tb_users where id=#{uid}
+    </delete>
+
+    <delete id="deleteUserByUsername" parameterType="string">
+        delete from tb_users where username=#{username}
+    </delete>
 
 </mapper>

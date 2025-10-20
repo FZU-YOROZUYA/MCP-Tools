@@ -1,8 +1,11 @@
 package com.yorozuya.mcp_tools.domain;
 
 
-import java.security.Timestamp;
+import lombok.ToString;
 
+import java.sql.Timestamp;
+
+@ToString
 public class User {
     private int id;
     private String username;
