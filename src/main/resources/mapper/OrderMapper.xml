@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yorozuya.mcp_tools.repository.OrderMapper">
+
+    <resultMap id="ToOrder" type="Order">
+        <result column="user_id" property="userId"/>
+        <result column="product_id" property="productId"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="ToOrder">
+        select * from tb_orders
+    </select>
+
+    <select id="findById" parameterType="_int" resultMap="ToOrder">
+        select * from tb_orders where id=#{oid}
+    </select>
+
+    <select id="findByUserId" parameterType="_int" resultMap="ToOrder">
+        select * from tb_orders where user_id=#{userId}
+    </select>
+
+    <select id="findByProductId" parameterType="_int" resultMap="ToOrder">
+        select * from tb_orders where product_id=#{productId}
+    </select>
+
+    <insert id="insertOrder" parameterType="Order">
+        insert into tb_orders
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=0">id,</if>
+            <if test="userId!=0">user_id,</if>
+            <if test="productId!=0">product_id,</if>
+            <if test="quantity!=0">quantity,</if>
+            <if test="totalPrice!=null">total_price,</if>
+            <if test="createdTime!=null">created_time,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=0">#{id},</if>
+            <if test="userId!=0">#{userId},</if>
+            <if test="productId!=0">#{productId},</if>
+            <if test="quantity!=0">#{quantity},</if>
+            <if test="totalPrice!=null">#{totalPrice},</if>
+            <if test="createdTime!=null">#{createdTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateOrderById" parameterType="Order">
+        update tb_orders
+        <set>
+            <if test="userId!=0">user_id=#{userId},</if>
+            <if test="productId!=0">product_id=#{productId},</if>
+            <if test="quantity!=0">quantity=#{quantity},</if>
+            <if test="totalPrice!=null">total_price=#{totalPrice},</if>
+            <if test="createdTime!=null">created_time=#{createdTime},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteOrderById" parameterType="_int">
+        delete from tb_orders where id=#{oid}
+    </delete>
+
+</mapper>
