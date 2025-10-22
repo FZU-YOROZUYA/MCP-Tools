@@ -2,6 +2,7 @@ package com.yorozuya.mcp_tools.controller;
 
 import com.yorozuya.mcp_tools.domain.Product;
 import com.yorozuya.mcp_tools.service.ProductService;
+import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,16 +18,19 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/find_all")
+    @Tool(name = "product_find_all", description = "查询所有商品信息")
     public List<Product> findAll() {
         return productService.getProducts();
     }
 
     @GetMapping("/find_by_id/{id}")
+    @Tool(name = "product_find_by_id", description = "根据商品 id 查询商品信息")
     public Product findById(@PathVariable("id") int id) {
         return productService.findById(id);
     }
 
     @GetMapping("/find_by_name")
+    @Tool(name = "product_find_by_name", description = "查询商品名称查询商品信息")
     public Product findByName(@RequestParam("name") String name) {
         return productService.findByName(name);
     }
